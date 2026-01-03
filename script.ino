@@ -8,20 +8,6 @@
 DHT dht(DHTPIN, DHTTYPE);
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-void startupAnimation() {
-  lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print(" DHT22 Monitor ");
-  lcd.setCursor(0,1);
-  lcd.print(" Initializing ");
-  delay(1500);
-
-  lcd.clear();
-  lcd.setCursor(0,0);
-  lcd.print(" Sensor Ready ");
-  delay(1000);
-}
-
 void setup() {
   Serial.begin(9600);
   dht.begin();
@@ -29,7 +15,12 @@ void setup() {
   lcd.init();
   lcd.backlight();
 
-  startupAnimation();
+  lcd.setCursor(0,0);
+  lcd.print("DHT22 Monitor");
+  lcd.setCursor(0,1);
+  lcd.print("Starting...");
+  delay(1500);
+  lcd.clear();
 }
 
 void loop() {
@@ -44,15 +35,13 @@ void loop() {
     lcd.print(" Sensor Error ");
     lcd.setCursor(0,1);
     lcd.print(" Check Wiring ");
-    Serial.println("DHT read failed");
     return;
   }
 
-  Serial.print("Temp: ");
-  Serial.print(t);
-  Serial.print(" C | Hum: ");
-  Serial.print(h);
-  Serial.println(" %");
+  String status;
+  if (h < 30) status = "LOW ";
+  else if (h > 70) status = "HIGH";
+  else status = "OK  ";
 
   lcd.setCursor(0,0);
   lcd.print("Temp: ");
@@ -62,6 +51,7 @@ void loop() {
 
   lcd.setCursor(0,1);
   lcd.print("Hum : ");
-  lcd.print(h,1);
-  lcd.print("%   ");
+  lcd.print((int)h);
+  lcd.print("% ");
+  lcd.print(status);
 }
