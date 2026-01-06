@@ -133,8 +133,9 @@ MIT License.
 Free to use, modify, and share.
 
 ---
+## 🙌 Author
 
-
+Built with Arduino and curiosity.
 
 <div style="text-align: center;">
     <a href="https://buymeacoffee.com/Asadbekswe" target="_blank">
@@ -146,9 +147,3 @@ Free to use, modify, and share.
                     -webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;">
     </a>
 </div>
-
-
-
-## 🙌 Author
-
-Built with Arduino and curiosity.
